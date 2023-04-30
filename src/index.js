@@ -1,13 +1,12 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { getGallery, totalPages } from './js/api-set';
+import { getGallery, totalPages } from './js/api';
 import { scroll } from './js/scroll';
 import { createGalleryItem } from './js/createMarkup';
 import Notiflix from 'notiflix';
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
-// const btnLoad = document.querySelector('.load-more');
 const guard = document.querySelector('.guard');
 let query = '';
 let page = 1;
@@ -22,7 +21,6 @@ const observer = new IntersectionObserver(onPagination, options);
 
 form.addEventListener('change', onInput);
 form.addEventListener('submit', onSubmit);
-// btnLoad.addEventListener('click', onClick);
 
 async function addGallerySubmit() {
   try {
@@ -36,21 +34,6 @@ async function addGallerySubmit() {
   }
 }
 
-// async function addGalleryClick() {
-//   try {
-//     const response = await getGallery(query, page);
-//     const images = response.data.hits;
-//     createGalleryItem(images);
-//     scroll();
-//     lightbox.refresh();
-//     if (page !== totalPages) {
-//       observer.observe(guard);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 async function addGalleryPag() {
   try {
     scroll();
@@ -60,7 +43,6 @@ async function addGalleryPag() {
     lightbox.refresh();
 
     if (page > totalPages) {
-      //     evt.target.classList.add('btn-hidden');
       Notiflix.Notify.warning(
         "We're sorry, but you've reached the end of search results."
       );
@@ -79,8 +61,6 @@ function onSubmit(evt) {
   evt.preventDefault();
   page = 1;
   gallery.innerHTML = '';
-  //   btnLoad.classList.add('btn-hidden');
-
   if (!evt.target.elements.searchQuery.value) {
     Notiflix.Notify.failure('Please, enter a search query');
   } else {
@@ -104,17 +84,6 @@ function addImages(response) {
     lightbox.refresh();
   }
 }
-
-// function onClick(evt) {
-//   page += 1;
-//   addGalleryClick();
-//   if (page > totalPages) {
-//     evt.target.classList.add('btn-hidden');
-//     Notiflix.Notify.warning(
-//       "We're sorry, but you've reached the end of search results."
-//     );
-//   }
-// }
 
 function onPagination(entries, observer) {
   entries.forEach(entry => {
