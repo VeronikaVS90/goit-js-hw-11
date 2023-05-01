@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const per_page = 40;
-let totalPages = 0;
+let allPages = 0;
 
 async function getGallery(query, page) {
   const API_KEY = '35896260-91a07da99bea408579985ab29';

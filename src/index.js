@@ -59,24 +59,11 @@ function onInput(evt) {
 
 function onSubmit(evt) {
   evt.preventDefault();
-  page = 1;
-  gallery.innerHTML = '';
-  if (!evt.target.elements.searchQuery.value) {
-    Notiflix.Notify.failure('Please, enter a search query');
-  } else {
-    addGallerySubmit();
-  }
-}
-
-function onSubmit(evt) {
-  evt.preventDefault();
   gallery.innerHTML = '';
   page = 1;
   observer.unobserve(guard);
   if (!evt.target.elements.searchQuery.value.trim()) {
-    Notiflix.Notify.failure(
-      'Input is empty. Please, write the subject of your request.'
-    );
+    Notiflix.Notify.failure('Please, enter a search query');
   } else {
     addGallerySubmit();
   }
