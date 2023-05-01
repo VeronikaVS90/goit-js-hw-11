@@ -13,7 +13,7 @@ let page = 1;
 const lightbox = new SimpleLightbox('.gallery a');
 const options = {
   root: null,
-  rootMargin: '100px',
+  rootMargin: '700px',
   threshold: 0,
 };
 
