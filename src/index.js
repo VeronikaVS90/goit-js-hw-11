@@ -7,7 +7,7 @@ import Notiflix from 'notiflix';
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
-const guard = document.querySelector('.guard');
+const div = document.querySelector('.div');
 let query = '';
 let page = 1;
 const lightbox = new SimpleLightbox('.gallery a');
@@ -27,7 +27,7 @@ async function addGallerySubmit() {
     const response = await getGallery(query, page);
     addImages(response);
     if (page !== totalPages) {
-      observer.observe(guard);
+      observer.observe(div);
     }
   } catch (error) {
     console.error(error);
@@ -92,7 +92,7 @@ function onPagination(entries, observer) {
       page += 1;
       addGalleryPag();
       if (page === totalPages) {
-        observer.unobserve(guard);
+        observer.unobserve(div);
       }
     }
   });
