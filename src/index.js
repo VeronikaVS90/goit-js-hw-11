@@ -37,7 +37,7 @@ function onSubmit(evt) {
   observer.unobserve(guard);
   if (!evt.target.elements.searchQuery.value.trim()) {
     Notiflix.Notify.failure(
-      'Input is empty. Please, write the subject of your request.'
+      'Please, enter a search query!'
     );
   } else {
     resultOfRequest();
