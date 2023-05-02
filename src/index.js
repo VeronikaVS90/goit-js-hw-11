@@ -2,12 +2,11 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { dataRequest, allPages } from './js/api-request';
+import { dataRequest, allPages } from './js/api';
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
-// console.log(typeof guard);
 
 const lightbox = new SimpleLightbox('.gallery a');
 
@@ -24,16 +23,13 @@ const options = {
 
 const observer = new IntersectionObserver(onObserver, options);
 
-//значення інпуту є змістом запиту
 function onInput(evt) {
   searchQuery = evt.target.value.trim();
-  //   console.log(searchQuery);
   return searchQuery;
 }
 
 form.addEventListener('submit', onSubmit);
 
-//при заповненому інпуті виконуємо сабміт та викликаємо функцію щоб виконати запит та отримати результати
 function onSubmit(evt) {
   evt.preventDefault();
   gallery.innerHTML = '';
@@ -48,7 +44,6 @@ function onSubmit(evt) {
   }
 }
 
-//здійснення запиту, виклик функціі для отримання результатів запиту
 async function resultOfRequest() {
   try {
     const response = await dataRequest(searchQuery, page);
@@ -58,7 +53,6 @@ async function resultOfRequest() {
   }
 }
 
-//масив об"єктів та виклик функці для створення розмітки
 function reciveOfImages(response) {
   const images = response.data.hits;
   console.log(images);
@@ -93,7 +87,7 @@ function reciveOfImages(response) {
   }
 }
 
-//створення розмітки
+//create markup
 function createGalleryMarkup(images) {
   const markup = images
     .map(image => {
@@ -120,9 +114,9 @@ function createGalleryMarkup(images) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', markup);
-}
+};
 
-//нескінченний скролл
+//add infinity scroll
 async function onObserver(entries, observer) {
   console.log(entries);
   entries.forEach(entry => {
