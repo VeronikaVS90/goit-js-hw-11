@@ -1,7 +1,6 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import { dataRequest, allPages } from './js/api';
 
 const form = document.querySelector('#search-form');
